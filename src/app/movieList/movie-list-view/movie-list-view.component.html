@@ -1,0 +1,127 @@
+<div
+  class="bg"
+  [ngStyle]="{
+    'background-image': 'url(' + imagePath + movie?.backdrop_path + ') '
+  }"
+  *ngIf="movie"
+>
+  <div class="p-5 rounded-3 position-relative pb-0">
+    <div
+      class="container-fluid py-5 text-white"
+      style="text-shadow: 2px 2px 2px #000"
+    >
+      <h1
+        class="display-5 fw-bold"
+        [ngClass]="{ text: movie?.backdrop_path === null }"
+      >
+        {{ movie?.title }}
+      </h1>
+      <p
+        class="col-md-8 fs-4"
+        [ngClass]="{ text: movie?.backdrop_path === null }"
+      >
+        {{ movie?.overview }}
+      </p>
+      <button
+        [routerLink]="['/']"
+        class="btn btn-outline-light"
+        type="button"
+        [ngClass]="{ text: movie?.backdrop_path === null }"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+
+  <div class="position-absolute pb-5" style="top: 200px; right: 40px">
+    <img
+      src="{{ imagePath + movie?.poster_path }}"
+      *ngIf="movie?.backdrop_path != null"
+    />
+    <img
+      src="{{ noImage }}"
+      *ngIf="movie?.backdrop_path === null"
+      width="500px"
+      height="750px"
+      style="opacity: 0.5"
+    />
+  </div>
+
+  <div class="container py-4">
+    <div class="row align-items-md-stretch">
+      <div class="col-8">
+        <div
+          class="h-100 p-5 text-white rounded-3"
+          style="box-shadow: 5px 5px 5px 5px #000"
+        >
+          <div class="d-flex">
+            <div
+              *ngFor="let item of movie?.genres"
+              [ngClass]="{ text: movie?.backdrop_path === null }"
+            >
+              <div>{{ item.name }} \</div>
+            </div>
+          </div>
+          <h2 [ngClass]="{ text: movie?.backdrop_path === null }">
+            {{ movie?.tagline }}d
+          </h2>
+          <div class="d-flex" style="font-weight: bold">
+            <p [ngClass]="{ text: movie?.backdrop_path === null }">
+              Average Vote: {{ movie?.vote_average }}
+            </p>
+            <p
+              style="margin-left: 6px"
+              [ngClass]="{ text: movie?.backdrop_path === null }"
+            >
+              Count Vote: {{ movie?.vote_count | number }}
+            </p>
+            <p
+              style="margin-left: 6px"
+              [ngClass]="{ text: movie?.backdrop_path === null }"
+            >
+              Runtime: {{ movie?.runtime }} min
+            </p>
+          </div>
+          <a
+            [ngClass]="{ text: movie?.backdrop_path === null }"
+            class="btn btn-outline-light"
+            [href]="movie?.homepage"
+            target="_blank"
+          >
+            WebSide
+          </a>
+        </div>
+      </div>
+      <div class="col-8 mt-4">
+        <div class="h-100 p-5 rounded-3">
+          <div class="d-flex justify-content-around align-items-center">
+            <div *ngFor="let item of movie?.production_companies">
+              <img
+                src="{{ imagePath + item?.logo_path }}"
+                width="160px"
+                [hidden]="item?.logo_path === null"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer
+    class="text-center p-3 mt-4 text-white border-top"
+    style="text-shadow: 1px 1px #000"
+  >
+    <span [ngClass]="{ text: movie?.backdrop_path === null }"
+      >&copy; {{ movie?.release_date | date: "y" }}</span
+    >
+    <div *ngFor="let item of movie?.production_countries">
+      <span [ngClass]="{ text: movie?.backdrop_path === null }">{{
+        item?.name
+      }}</span>
+    </div>
+  </footer>
+</div>
+
+<div class="loading">
+  <div class="spinner-border" role="status" *ngIf="!movie"></div>
+</div>

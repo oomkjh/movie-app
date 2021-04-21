@@ -1,0 +1,32 @@
+.img {
+  overflow: hidden;
+
+  img {
+    cursor: pointer;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+  &.title {
+    -webkit-line-clamp: 1;
+  }
+  &.overview {
+    -webkit-line-clamp: 3;
+  }
+}
+
+.bg {
+  background-image: url("/assets/img/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
