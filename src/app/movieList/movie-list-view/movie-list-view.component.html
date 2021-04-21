@@ -97,6 +97,7 @@
           <div class="d-flex justify-content-around align-items-center">
             <div *ngFor="let item of movie?.production_companies">
               <img
+                class="logo"
                 src="{{ imagePath + item?.logo_path }}"
                 width="160px"
                 [hidden]="item?.logo_path === null"
