@@ -5837,6 +5837,13 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
+ngx-countdown@^11.0.3:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/ngx-countdown/-/ngx-countdown-11.0.3.tgz#5468581cb7ffcdc9230b8d13a7f18f8aff7e0263"
+  integrity sha512-Porzyl9jo/lS0eg6dUS0UEloRyfk9naDeL2iSt/4Wwmogq+hlHXUDvVuLm/kO7haAGYOQPSsuAIoFB4m9fRMTg==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

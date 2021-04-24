@@ -5,9 +5,18 @@ import { MovieRoutingModule } from './movie-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieListViewComponent } from './movie-list-view/movie-list-view.component';
 import { MovieCartComponent } from './movie-cart/movie-cart.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
-  imports: [CommonModule, MovieRoutingModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    MovieRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    CountdownModule,
+  ],
   exports: [],
   declarations: [
     MovieListComponent,

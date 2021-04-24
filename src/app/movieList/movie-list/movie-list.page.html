@@ -4,7 +4,6 @@
     <p class="lead text-white">
       Welcome. Millions of movies, TV shows and people to discover. Explore now.
     </p>
-
     <input
       class="form-control mr-sm-2"
       type="text"
@@ -13,13 +12,13 @@
       #inputText
       (keyup)="search(inputText.value)"
     />
-    <!-- <button
-      (click)="search(inputText?.value)"
+    <button
+      [routerLink]="['/movie-cart']"
       class="btn btn-success my-2"
       type="submit"
     >
-      Search
-    </button> -->
+      Cart
+    </button>
   </div>
 </section>
 
@@ -63,12 +62,12 @@
                 >
                   View
                 </a>
-                <!-- <button
-                  [routerLink]="['/movie-cart', item.id]"
+                <button
                   class="btn btn-outline-secondary"
+                  (click)="addCart(item)"
                 >
                   Add Cart
-                </button> -->
+                </button>
               </div>
               <small class="text-muted"
                 >{{item.popularity | number: '1.0-0'}} Popularity</small

@@ -10,7 +10,7 @@ const routes: Routes = [
     component: MovieListComponent,
   },
   { path: 'movie/:id', component: MovieListViewComponent },
-  { path: 'movie-cart/:id', component: MovieCartComponent },
+  { path: 'movie-cart', component: MovieCartComponent },
 ];
 
 @NgModule({

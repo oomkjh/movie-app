@@ -1,0 +1,215 @@
+<div class="container con bg-light">
+  <div class="d-flex justify-content-between align-items-center">
+    <button class="btn btn-outline-dark btn-sm h-50" [routerLink]="['/']">
+      Back
+    </button>
+
+    <h2 class="d-flex align-items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        fill="currentColor"
+        class="bi bi-cart"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+        />
+      </svg>
+      <span style="margin-left: 6px"
+        >CART
+        <span style="font-weight: 400">({{ listCart?.length }})</span></span
+      >
+    </h2>
+    <button
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#clearCart"
+      class="btn btn-outline-secondary btn-sm"
+    >
+      Clear Cart
+    </button>
+  </div>
+  <ul class="list-group mt-5" *ngFor="let item of listCart">
+    <li class="list-group-item d-flex justify-content-between">
+      <div class="d-flex">
+        <img src="{{ imagePath + item?.cart_Img }}" width="180px" />
+        <div style="margin-left: 16px">
+          <div style="font-size: 20px; font-weight: 500">
+            {{ item?.cart_Title }}
+          </div>
+          <div style="font-size: 16px; font-weight: 400">
+            <span style="font-weight: 500">Price :</span> ฿{{
+              item?.cart_Price | number
+            }}
+          </div>
+          <div>
+            <label for="price" style="font-size: 14px">change Price : </label>
+            <div class="d-flex">
+              <input
+                type="number"
+                id="price"
+                name="price"
+                ngModel
+                #price="ngModel"
+                class="w-50"
+                min="0"
+              />
+              <button
+                class="btn btn-outline-dark btn-sm"
+                (click)="editPrice(item, price?.value)"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#buyer"
+          class="btn btn-outline-info"
+        >
+          Buy
+        </button>
+        <button
+          (click)="remove(item?.id)"
+          class="btn btn-outline-danger"
+          style="margin-top: 4px"
+        >
+          Remove
+        </button>
+      </div>
+    </li>
+  </ul>
+  <div
+    style="margin-top: 20px; font-size: 16px; font-weight: 400"
+    *ngIf="listCart?.length < 3"
+  >
+    <span style="font-weight: 500">Total_Price :</span> ฿{{ count | number }}
+  </div>
+  <div
+    style="margin-top: 20px; font-size: 16px; font-weight: 400"
+    *ngIf="listCart?.length >= 3 && listCart?.length < 5"
+  >
+    <div>สินค้ามากกว่า 3 ชิ้นขึ้นไป ลด 10%</div>
+    <div>
+      <span style="font-weight: 500">Original_Price : </span>฿{{
+        count | number: "1.2-2"
+      }}
+    </div>
+    <div>
+      <span style="font-weight: 500">Discount_Price : </span> ฿{{
+        (count * 10) / 100 | number: "1.2-2"
+      }}
+    </div>
+    <div>
+      <span style="font-weight: 500">Total_Price : </span> ฿{{
+        count - (count * 10) / 100 | number: "1.2-2"
+      }}
+    </div>
+  </div>
+  <div
+    style="margin-top: 20px; font-size: 16px; font-weight: 400"
+    *ngIf="listCart?.length >= 5"
+  >
+    <div>สินค้ามากกว่า 5 ชิ้นขึ้นไป ลด 20%</div>
+    <div>
+      <span style="font-weight: 500">Original_Price : </span>฿{{
+        count | number: "1.2-2"
+      }}
+    </div>
+    <div>
+      <span style="font-weight: 500">Discount_Price : </span> ฿{{
+        (count * 20) / 100 | number: "1.2-2"
+      }}
+    </div>
+    <div>
+      <span style="font-weight: 500">Total_Price : </span> ฿{{
+        count - (count * 20) / 100 | number: "1.2-2"
+      }}
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="clearCart"
+  tabindex="-1"
+  aria-hidden="true"
+  *ngIf="listCart?.length > 0"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">คุณต้องลบสินค้าออกจากตะกร้าทั้งหมด?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          (click)="clearCart()"
+          type="button"
+          data-bs-dismiss="modal"
+          class="btn btn-primary"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="buyer"
+  tabindex="-1"
+  aria-hidden="true"
+  *ngIf="listCart?.length > 0"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="cd.restart()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        คุณต้องโอนเงินมาที่นี่ภายในเวลา
+        <countdown
+          #cd
+          [config]="{ leftTime: timeleft, format: 'ss' }"
+        ></countdown>
+        วินาที
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="cd.restart()"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
