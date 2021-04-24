@@ -6,4 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - clone project ทำการลง package โดยใช้ npm install หรือ yarn install ก็ได้
 - สั่ง ng serve หรือ npm start or yarn start
+- open in integrated terminal ที่ floder db
+- run คำสั่ง json-server --watch cart.json
 - Done
